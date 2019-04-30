@@ -1,12 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "skaffold-helm.fullname" . -}}
-{{- $servicePort := .Values.service.externalPort -}}
+{{- $serviceName := include "exampleapp.fullname" . -}}
+{{- $servicePort := .Values.nginx.externalPort -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "skaffold-helm.fullname" . }}
+  name: {{ template "exampleapp.fullname" . }}
   labels:
-    app: {{ template "skaffold-helm.name" . }}
+    app: {{ template "exampleapp.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

@@ -6,6 +6,8 @@ build:
   artifacts:
     - image: gcr.io/skaff-jwtea/hello
       context: ./containers/hello
+    - image: gcr.io/skaff-jwtea/site
+      context: ./containers/site
 test:
   - image: gcr.io/skaff-jwtea/hello
     structureTests:
@@ -13,13 +15,11 @@ test:
 deploy:
   helm:
     releases:
-      - name: hello-helm
-        chartPath: hello-helm
+      - name: exampleapp
+        chartPath: helm
         #wait: true
         #valuesFiles:
         #- helm-skaffold-values.yaml
-        values:
-          image: gcr.io/skaff-jwtea/hello
         #recreatePods will pass --recreate-pods to helm upgrade
         #recreatePods: true
         #overrides builds an override values.yaml file to run with the helm deploy
